@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nexus - Building Student Community & Efficiency </title>
+    <style>
+        body {
+            font-family: Verdana, Geneva, sans-serif;
+            font-size: 10pt;
+            color: #000;
+            background-color: #f6f6ef;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header {
+            background-color: #aa4705;
+            padding: 6px;
+        }
+        
+        .header table {
+            width: 100%;
+        }
+        
+        .header .logo {
+            color: white;
+            font-weight: bold;
+            font-size: 12pt;
+            text-decoration: none;
+        }
+        
+        .header .nav {
+            color: white;
+            margin-left: 10px;
+        }
+        
+        .header .nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+        
+        .header .nav a:hover {
+            text-decoration: underline;
+        }
+        
+        .container {
+            background-color: #f6f6ef;
+            padding: 20px;
+            max-width: 1700px;
+            margin: 0 auto;
+        }
+        
+        table.itemlist {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        .athing {
+            background-color: #f6f6ef;
+        }
+        
+        .rank {
+            color: #828282;
+            text-align: right;
+            vertical-align: top;
+            width: 30px;
+            padding-right: 4px;
+        }
+        
+        .votelinks {
+            text-align: center;
+            vertical-align: top;
+            width: 14px;
+        }
+        
+        .votearrow {
+            cursor: pointer;
+            font-size: 10px;
+            color: #828282;
+        }
+        
+        .votearrow:hover {
+            color: #aa4705;
+        }
+        
+        .title-cell {
+            vertical-align: top;
+            padding-right: 4px;
+        }
+        
+        .storylink {
+            color: #000;
+            text-decoration: none;
+            font-size: 20px;
+        }
+        
+        .storylink:visited {
+            color: #828282;
+        }
+        
+        .storylink:hover {
+            text-decoration: underline;
+        }
+        
+        .sitebit {
+            color: #828282;
+            font-size: 8pt;
+        }
+        
+        .sitebit a {
+            color: #828282;
+            text-decoration: none;
+        }
+        
+        .subtext {
+            font-size: 10pt;
+            color: #828282;
+            padding-top: 2px;
+        }
+        
+        .subtext a {
+            color: #828282;
+            text-decoration: none;
+        }
+        
+        .subtext a:hover {
+            text-decoration: underline;
+        }
+        
+        .hnuser {
+            color: #3c963c !important;
+        }
+        
+        .spacer {
+            height: 8px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 500px;
+            max-width: 90%;
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: black;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            font-family: inherit;
+            font-size: 10pt;
+        }
+        
+        .form-group textarea {
+            height: 80px;
+            resize: vertical;
+        }
+        
+        .btn {
+            background-color: #aa4705;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 10pt;
+        }
+        
+        .btn:hover {
+            background-color: #e55a00;
+        }
+        
+        .error-message {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 10px;
+            border: 1px solid #e57373;
+            margin-bottom: 15px;
+            display: none;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            display: none;
+        }
+        
+        .back-link {
+            color: #828282;
+            text-decoration: none;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .forum-header {
+            background-color: white;
+            padding: 15px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .forum-title {
+            font-size: 14pt;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .forum-description {
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        
+        .drive-link-section {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border: 1px solid #b3d9e8;
+            margin-bottom: 20px;
+            border-radius: 3px;
+        }
+        
+        .drive-link {
+            color: #0066cc;
+            text-decoration: none;
+            word-break: break-all;
+        }
+        
+        .drive-link:hover {
+            text-decoration: underline;
+        }
+        
+        .comments-section {
+            background-color: white;
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+        
+        .comment-form {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #f8f8f8;
+        }
+        
+        .comment {
+            border-left: 2px solid #aa4705;
+            padding-left: 15px;
+            margin-bottom: 15px;
+            background-color: #fafafa;
+            padding: 10px 15px;
+        }
+        
+        .comment-meta {
+            font-size: 14pt;
+            color: #828282;
+            margin-bottom: 8px;
+        }
+        
+        .comment-content {
+            line-height: 1.4;
+        }
+        
+        #homepage {
+            display: block;
+        }
+        
+        #forum-page {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <table>
+            <tr>
+                <td>
+                    <a href="#" onclick="showHomepage()" class="logo">nexus</a>
+                    <span class="nav">
+                        <a href="#" onclick="showHomepage()">forums</a>
+                        <a href="#" onclick="showCreateModal()">submit</a>
+                    </span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="container">
+        <div id="error-message" class="error-message"></div>
+        <div id="loading" class="loading">Loading...</div>
+        
+        <!-- Homepage -->
+        <div id="homepage">
+            <table class="itemlist" id="forums-table">
+                <tbody id="forums-list">
+                    <!-- Forums will be loaded here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Forum Page -->
+        <div id="forum-page">
+            <!-- Forum content will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Create Forum Modal -->
+    <div id="create-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="hideCreateModal()">&times;</span>
+            <h2>Submit New Forum</h2>
+            <form id="create-form">
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="content">Description:</label>
+                    <textarea id="content" name="content" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="url">Course Materials URL (optional):</label>
+                    <input type="url" id="url" name="url" placeholder="https://drive.google.com/...">
+                </div>
+                <div class="form-group">
+                    <label for="author">Your Name:</label>
+                    <input type="text" id="author" name="author" required>
+                </div>
+                <button type="submit" class="btn">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // VERSION CONTROL: Change this to auto-refresh localStorage
+        // ==========================================
+        const DATA_VERSION = 'v13'; // Increment this whenever you edit defaultForums or defaultComments
+
+        // ==========================================
+        // PERSISTENCE: localStorage keys
+        // ==========================================
+        const STORAGE_FORUMS_KEY = 'notehack_forums_v1';
+        const STORAGE_COMMENTS_KEY = 'notehack_comments_v1';
+        const STORAGE_VERSION_KEY = 'notehack_data_version';
+
+        // ==========================================
+        // DEFAULT DATA (used only if nothing in localStorage or version changed)
+        // ==========================================
+        let defaultForums = [
+            {
+                id: '1',
+                title: 'AP Biology Unit 1 Notes/Tips/Tricks',
+                content: 'This forum is all about mastering the chemistry of life--the building blocks that make biology tick. Dive into atoms, molecules, water, and organic compounds, explore enzymes and energy flow, and sharpen your understanding of photosynthesis, respiration, and scientific thinking. Look at these resources, and get ready to ace the test!',
+                url: 'https://drive.google.com/drive/folders/1Llx5SVXwPQNlAzwmzbzyynpIF1fLfUt8',
+                author: 'john',
+                created_at: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+                upvotes: 32
+            },
+            {
+                id: '2',
+                title: 'AP Biology Unit 2 Notes/Tips/Tricks',
+                content: 'This forum focuses on the cell, the basic unit of life. Explore the differences between prokaryotic and eukaryotic cells, the roles of organelles, and how structure affects fucntion. Discuss the endomembrane system, energy-related organelles, cytoskeleton, and cell adaptations. Perfect for connecting the dots between cell biology and real-world biology applications.',
+                url: 'https://drive.google.com/drive/folders/1XZfRHUS0Z9JA4KcMs1iZ7mVTaQIZK0Kx?usp=share_link',
+                author: 'alice',
+                created_at: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+                upvotes: 25
+            },
+            {
+                id: '3',
+                title: 'AP Biology Unit 3 Notes/Tips/Tricks',
+                content: 'This forum dives into how cells capture, convert, and use energy. Topics include enzymes, metabolic pathways, photosynthesis, cellular respiration, and ATP. Learn how energy moves through ecosystems and within cells, and get clarity on processes like glycolysis, Krebs Cycle, and oxidative phosphorylation. Ideal for students who want to link energy concepts to test questions.',
+                url: 'https://drive.google.com/drive/folders/1u2dhDDlQxC4cGpt2GyD6UchvyEIx9svl?usp=share_link',
+                author: 'nicholas',
+                created_at: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+                upvotes: 19
+            },
+            {
+                id: '4',
+                title: 'AP Biology Unit 4 Notes/Tips/Tricks',
+                content: 'This forum is all about how cells communicate and divide. Discuss signal transduction, ligands, receptors, hormones, and feedback loops, and how cells control the cell cycle. Dive into mitosis, cytokinesis, regulation mechnanisms, cancer biology. A great place to clarify tricky signaling pathways and understand how cells maintain balance and respond to their environment.',
+                url: 'https://drive.google.com/drive/folders/188dUOdRPAUqfODQXNfCcy-0THcPWZGqI?usp=share_link',
+                author: 'kimberly',
+                created_at: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+                upvotes: 18
+            },
+            {
+                id: '5',
+                title: 'AP Physics 1 Unit 1: Kinematics - Motion, Graphs, and Projectiles',
+                content: "Kinematics isn’t just 'x vs. t graphs' — it’s about seeing motion as math. The hardest parts: projectile motion (breaking vectors into x & y) and graph interpretation. Students often confuse slope vs. area. Rule of thumb: slope = rate of change, area = accumulation. For projectiles, remember: horizontal velocity is constant, vertical motion is free-fall. Don’t try to memorize 'trick formulas' — instead, always write down:\n- Known variables (ex. v₀, a, x, y).\n- Separate into x & y.\n- Choose the right kinematic equations\nUsing this, you can find the formulas with the variables that you have and need to solve and then solve for the variable.\nTough Example: A ball launched at 20 m/s at 30°. Find time of flight. → Split into vertical: v₀y = 10 m/s. Use t = 2v₀y/g ≈ 2.04 s. Done.\nAdvice: When stuck, literally sketch the motion and label. The diagram almost always reveals the missing piece.",
+                url: '',
+                author: 'sophia',
+                created_at: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+                upvotes: 14
+            },
+            {
+                id: '6',
+                title: 'AP Physics 1 Unit 2: Forces & Newton’s Laws - Mastering Free-Body Diagrams',
+                content: "This is where forces start to feel messy. The hardest part is free-body diagrams (free body diagrams) and Newton’s 2nd Law in 2D. Students freeze when multiple forces act at angles. Tip: resolve everything into x and y — your axes are your best friends.\nExample: A 5 kg block pulled with 20 N at 30° above horizontal, μ = 0.2. Find acceleration.\n Step 1: Break tension → Tₓ = 17.3 N, Tᵧ = 10 N.\n Step 2: Normal force = mg − Tᵧ = 39 N.\n Step 3: Friction = μN = 7.8 N.\n Step 4: Net Fₓ = 17.3 − 7.8 = 9.5 N.\n a = F/m = 1.9 m/s².\nAdvice: If you can’t draw a clean free body diagrams, you can’t solve it. That’s 80% of the work.",
+                url: '',
+                author: 'liam',
+                created_at: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+                upvotes: 11
+            },
+            {
+                id: '7',
+                title: 'AP Physics 1 Unit 3: Circular Motion & Gravitation - Centripetal Force Demystified',
+                content: "The classic trap is mixing up centripetal force and 'new' forces. Centripetal force isn’t an extra force — it’s just the net force pointing inward.\nExample: Car of mass 1000 kg, speed 20 m/s on r = 50 m curve. F = mv²/r = 8000 N. If friction < 8000 N, car skids.\nHarder: Satellites. Gravitational force = centripetal force → GMm/r² = mv²/r. Cancel m → v = √(GM/r).\nAdvice: Always ask: what is providing the centripetal force? (friction? tension? gravity?). That question unlocks the problem.",
+                url: '',
+                author: 'maya',
+                created_at: new Date(Date.now() - 9 * 24 * 60 * 60 * 1000).toISOString(),
+                upvotes: 9
+            },
+            {
+                id: '8',
+                title: 'AP Physics 1 Unit 4: Energy - Work, Conservation, and Bar Charts',
+                content: "The trap is mixing up work-energy vs. conservation of energy. Work-energy theorem: W = ΔKE. Conservation: KE + PE = constant (if no non-conservative work).\nExample: 2 kg block slides down 5 m incline, friction = 4 N.\n PE lost = 2×9.8×5 = 98 J. Work of friction = −4×5 = −20 J. KE gained = 78 J → v = √(2KE/m) ≈ 8.8 m/s.\nAdvice: Write energy bar charts. If friction/work is involved, use the work-energy theorem. If not, conservation is faster.",
+                url: '',
+                author: 'elijah',
+                created_at: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+                upvotes: 13
+            },
+            {
+                id: '9',
+                title: 'AP Physics 1 Unit 5: Momentum - Collisions and Conservation',
+                content: "Momentum problems look scary with collisions. Key: system momentum is conserved in absence of external force. KE may or may not be conserved.\nExample: 2 kg at 3 m/s collides inelastically with 1 kg at rest. Momentum: (2×3 + 1×0) = 6 kg·m/s. Final v = 6/3 = 2 m/s. KE before = 9 J, after = 6 J → some lost.\nAdvice: Always do momentum first. Then, if elastic, add KE conservation. If not elastic, stop there.",
+                url: '',
+                author: 'olivia',
+                created_at: new Date(Date.now() - 6 * 24 * 60 * 60 * 1000).toISOString(),
+                upvotes: 10
+            },
+            {
+                id: '10',
+                title: 'AP Physics 1 Unit 6: Simple Harmonic Motion - Springs, Pendulums, and Energy',
+                content: "The hardest part: connecting energy, acceleration, and trig functions. SHM is just an object oscillating with restoring force F = −kx. Period formulas:\nSpring: T = 2π√(m/k).\nPendulum: T = 2π√(L/g).\nExample: Mass 0.5 kg on spring k=200 N/m. T = 2π√(0.5/200) ≈ 0.31 s.\nAdvice: Know energy exchange: at equilibrium → KE max, PE = 0. At extremes → PE max, KE = 0. That unlocks energy-based questions.",
+                url: '',
+                author: 'noah',
+                created_at: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+                upvotes: 8
+            },
+            {
+                id: '11',
+                title: 'AP Physics 1 Unit 7: Torque & Rotational Motion - Dynamics in a Circle',
+                content: "This unit kills students because it’s like dynamics all over again, but rotational. Torque τ = rFsinθ. Newton’s 2nd Law for rotation: Στ = Iα.\nExample: 2 m rod pivoted at end, 5 N force at other end, perpendicular. Torque = 2×5 = 10 N·m. If I = (1/3)ML², with M=3, L=2 → I = 4. α = τ/I = 2.5 rad/s².\nAdvice: Draw rotation free body diagrams like linear ones. Parallel axis theorem comes up rarely, but know it: I = Icm + Md².",
+                url: '',
+                author: 'emma',
+                created_at: new Date(Date.now() - 8 * 24 * 60 * 60 * 1000).toISOString(),
+                upvotes: 7
+            },
+            {
+                id: '12',
+                title: 'AP Physics 1 Unit 8: Fluids - Pressure, Buoyancy, and Bernoulli',
+                content: "FLUIDS ARE KNOWN AS THE HARDEST UNIT IN THE PHYSICS CURRICULUM, but they’re just liquids + gases that flow. Here’s the crash course:\nPressure: Goes up the deeper you go. Formula = P = P₀ + ρgh. That’s why your ears pop underwater.\nBuoyancy: Things float if they push out (displace) enough water. Rule = buoyant force = weight of displaced fluid. Density is the real dealbreaker: less dense → float, more dense → sink.\nBernoulli’s Principle: Fast fluid = low pressure. That’s how planes fly, perfume sprays, and why shower curtains attack you.\nQuick Example: A block with density 800 kg/m³ in water?\n 800/1000 = 0.8 → 80% under water, 20% above.\nPro Tip: Always ask: what forces are acting (weight vs buoyant), or is it a “fast vs slow fluid” situation (Bernoulli)? That’s 90% of fluid problems.",
+                url: '',
+                author: 'lucas',
+                created_at: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString(),
+                upvotes: 6
+            }
+        ];
+
+        let defaultComments = {
+            '1': [
+                {
+                    id: 'c1',
+                    author: 'john',
+                    content: 'Okay, real talk—AP Bio can feel like a ton of memorization, but a few tricks go a long way. First, always connect concepts to real life. Like, think about water properties not just as “cohesion” or “adhesion” but as why your straw works when you drink soda or why ice cubes float in your drink. For enzymes, picture the active site like a puzzle piece—if the shape changes (pH or heat), nothing fits, nothing works. Mnemonics are lifesavers: “CHNOPS” for the main elements, or “King Philip Came Over For Good Soup” for taxonomy (even though that’s not Unit 1, it’s handy). Lastly, don’t just memorize pathways like glycolysis—trace where the energy goes. Ask yourself: “If ATP runs out, what happens?” Visualizing it makes it stick.',
+                    created_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString()
+                },
+                {
+                    id: 'c2',
+                    author: 'john',
+                    content: 'AP Bio exam day? Here’s what I wish I knew sooner. Time management is key: don’t get stuck on one crazy FRQ. If you know something but can’t remember the exact term, explain it in plain words—partial credit is real. Watch for tricky wording on multiple-choice: “all of the following except” and “which is true” show up everywhere. For Unit 1, always relate molecules to function—why does water float? Why do lipids form membranes? Quick sketches help a ton for explaining macromolecules or energy flow. And seriously, sleep the night before. Your brain remembers patterns way better when you’re not exhausted.',
+                    created_at: new Date(Date.now() - 12 * 60 * 60 * 1000).toISOString()
+                }
+            ],
+            '2': [
+                {
+                    id: 'c3',
+                    author: 'alice',
+                    content: 'Cells are tiny but wild when you break them down. Honestly, think of organelles like rooms in a house: the nucleus is the control center, mitochondria are the power plants, ER is the factory, and Golgi is the post office. Makes it so much easier to remember what does what. Also, always link cell size and surface area to real life—like why your intestines have microvilli or why neurons are long and skinny. Draw it, label it, color it—it sticks better than just reading a textbook. Oh, and prokaryotes vs eukaryotes? Don’t just memorize. Imagine bacteria as minimalists with just the essentials, eukaryotes as fancy apartments with rooms for everything.',
+                    created_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString()
+                },
+                {
+                    id: 'c4',
+                    author: 'alice',
+                    content: 'For the AP exam, expect tricky questions on organelle functions or differences between plant and animal cells. Quick tip: always ask “why does this matter?” For example, lysosomes in animals = clean-up crew, vacuoles in plants = water storage and pressure. Visual memory helps here—sketch plant vs animal cells, label big stuff, and it’ll save time on FRQs. Also, don’t freak out about mitochondria vs chloroplasts—focus on their main energy job, membranes, and DNA/Ribosomes since that shows up all the time. Finally, if a question is wordy, underline the action—“what happens if…” or “which organelle…”—so you answer exactly what’s asked.',
+                    created_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString()
+                }
+            ],
+            '3': [
+                {
+                    id: 'c5',
+                    author: 'nicholas',
+                    content: 'Honestly, for Unit 3, just remember ATP is basically your cell’s “money”. Every reaction that needs energy is basically “paying” with ATP. Draw the cycle a few times—it sticks in your brain way better than memorizing random numbers. Also, know the difference between substrate-level phosphorylation (like glycolysis & Krebs) and oxidative phosphorylation (ETC). It’s a classic FRQ trap. Pro tip: For enzymes, think real life—lactase breaking down milk, amylase in your mouth. If you can explain it like you’re telling a friend, you’ll ace the FRQs. Oh, and watch out for graphs showing temp or pH vs enzyme activity—they LOVE those in multiple choice.',
+                    created_at: new Date(Date.now() - 12 * 60 * 60 * 1000).toISOString()
+                },
+                {
+                    id: 'c6',
+                    author: 'nicholas',
+                    content: 'Cellular respiration & photosynthesis can get confusing, so here’s how I remember it: CR = break sugar to make ATP, Photosynthesis = use light to make sugar. Literally reverse processes. If you draw arrows back and forth, it makes sense. Also, don’t sleep on fermentation—you’ll see a muscle fatigue FRQ or yeast scenario. Think anaerobic = backup plan when oxygen is gone. And for the ETC, just picture it like a water slide for electrons that ends with ATP generation. Super visual, super sticky in your brain.',
+                    created_at: new Date(Date.now() - 12 * 60 * 60 * 1000).toISOString()
+                }
+            ],
+            '4': [
+                {
+                    id: 'c7',
+                    author: 'kimberly',
+                    content: 'Honestly, for Unit 4, make sure you know the difference between local and long-distance signaling (paracrine vs endocrine). People mix these up all the time. Also, memorize the main steps of signal transduction (Reception → Transduction → Response) because AP LOVES asking which step is affected if a receptor mutates. Lastly, for the cell cycle part, focus on checkpoints (G1, G2, M)—if you get how cyclins and CDKs control them, you’re golden.',
+                    created_at: new Date(Date.now() - 12 * 60 * 60 * 1000).toISOString()
+                },
+                {
+                    id: 'c8',
+                    author: 'kimberly',
+                    content: 'Don’t just memorize terms—understand the logic of signaling pathways. If a receptor is blocked, what happens downstream? That’s literally free points if you can think through cause-and-effect. Also, know how signal amplification works—multiple molecules getting activated from one signal is a big deal. For the cell cycle, don’t sleep on mitosis stages and why they matter (ex: what would happen if spindle fibers don’t attach?). These scenarios show up in FRQs all the time.',
+                    created_at: new Date(Date.now() - 12 * 60 * 60 * 1000).toISOString()
+                }
+            ],
+             '5': [
+                {
+                    id: 'c9',
+                    author: 'sophia',
+                    content: 'For Unit 5, just remember that kinematics is all about motion. The key is to break down vectors into x and y components. For example, if a projectile is launched at 30°, split it into x and y components. The x component is v₀cos(30°), and the y component is v₀sin(30°). Then, use the kinematic equations to solve for the time of flight. The key is to always write down the known variables and the unknown variables.',
+                    created_at: new Date(Date.now() - 12 * 60 * 60 * 1000).toISOString()
+                },
+                {
+                    id: 'c10',
+                    author: 'michael',
+                    content: 'Don’t underestimate drawing a motion diagram before you start any kinematics problem. Without this, I would’ve failed the last quiz—visualizing the path made the difference between guessing and actually solving it.',
+                    created_at: new Date(Date.now() - 8 * 60 * 60 * 1000).toISOString()
+                },
+                {
+                    id: 'c11',
+                    author: 'emily',
+                    content: 'My teacher’s pop quiz almost messed me up on displacement vs distance. This resource saved me—always double-check your units and directions, or you’ll lose easy points.',
+                    created_at: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString()
+                }
+            ],
+            '6': [
+                {
+                    id: 'c12',
+                    author: 'daniel',
+                    content: 'Unit 6 is all about Newton’s Laws. I used to mix up action-reaction pairs until I started writing out every force acting on each object. Seriously, free-body diagrams are a lifesaver—without them, I’d get lost in the word problems.',
+                    created_at: new Date(Date.now() - 11 * 60 * 60 * 1000).toISOString()
+                },
+                {
+                    id: 'c13',
+                    author: 'olivia',
+                    content: 'The practice problems here helped me finally get normal force questions right. That one quiz where the teacher put a box on an incline almost got me, but remembering to break forces into parallel and perpendicular saved me.',
+                    created_at: new Date(Date.now() - 7 * 60 * 60 * 1000).toISOString()
+                }
+            ],
+            '7': [
+                {
+                    id: 'c14',
+                    author: 'liam',
+                    content: 'For Unit 7, conservation of energy is everything. I used to forget to include all forms of energy, especially potential energy. After missing a test question, I started making a habit of writing out the full energy equation every time.',
+                    created_at: new Date(Date.now() - 10 * 60 * 60 * 1000).toISOString()
+                },
+                {
+                    id: 'c15',
+                    author: 'ava',
+                    content: 'This resource saved me when I kept mixing up work done by friction vs work done by applied force. The worked examples here made it finally click—without them, I’d still be losing points on every homework.',
+                    created_at: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString()
+                }
+            ],
+            '8': [
+                {
+                    id: 'c16',
+                    author: 'noah',
+                    content: 'Momentum problems used to trip me up, especially with inelastic collisions. The tip about always checking if momentum is conserved before and after helped me avoid silly mistakes on the last test.',
+                    created_at: new Date(Date.now() - 9 * 60 * 60 * 1000).toISOString()
+                },
+                {
+                    id: 'c17',
+                    author: 'mia',
+                    content: 'Impulse = change in momentum. I kept forgetting to use the right formula until I saw the summary here. That one tricky quiz question would’ve cost me, but this resource saved me.',
+                    created_at: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString()
+                }
+            ],
+            '9': [
+                {
+                    id: 'c18',
+                    author: 'ethan',
+                    content: 'Rotational motion is tough, but drawing analogies to linear motion (like torque is the “rotational force”) made it way easier. Without this trick, I would’ve failed the last rotational inertia question.',
+                    created_at: new Date(Date.now() - 8 * 60 * 60 * 1000).toISOString()
+                },
+                {
+                    id: 'c19',
+                    author: 'isabella',
+                    content: 'Angular momentum conservation was confusing until I practiced with the examples here. That one lab where we spun on a chair finally made sense—this resource saved me from blanking on the test.',
+                    created_at: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString()
+                }
+            ],
+            '10': [
+                {
+                    id: 'c20',
+                    author: 'logan',
+                    content: 'Simple harmonic motion seemed impossible until I started sketching the motion and labeling equilibrium points. Without this, I would’ve missed half the questions on the last quiz.',
+                    created_at: new Date(Date.now() - 7 * 60 * 60 * 1000).toISOString()
+                },
+                {
+                    id: 'c21',
+                    author: 'charlotte',
+                    content: 'The tip about always checking phase relationships in SHM problems saved me. That one tricky question about velocity and acceleration almost messed me up, but this resource made it clear.',
+                    created_at: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString()
+                }
+            ],
+            '11': [
+                {
+                    id: 'c22',
+                    author: 'lucas',
+                    content: 'Thermodynamics was a nightmare until I started using the PV diagrams from this site. Without them, I would’ve failed the “work done by gas” questions on the last test.',
+                    created_at: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString()
+                },
+                {
+                    id: 'c23',
+                    author: 'amelia',
+                    content: 'The difference between heat and temperature tripped me up until I read the explanations here. That one quiz where the teacher asked about specific heat almost got me, but this resource saved me.',
+                    created_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString()
+                }
+            ],
+            '12': [
+                {
+                    id: 'c24',
+                    author: 'jack',
+                    content: 'Electricity and circuits finally made sense after I started drawing every circuit, labeling current and voltage. Without this, I would’ve failed the last lab practical.',
+                    created_at: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString()
+                },
+                {
+                    id: 'c25',
+                    author: 'harper',
+                    content: 'Kirchhoff’s rules were confusing until I practiced with the step-by-step problems here. That one quiz with a multi-loop circuit almost messed me up, but this resource saved me.',
+                    created_at: new Date(Date.now() - 1 * 60 * 60 * 1000).toISOString()
+                }
+            ]
+        };
+
+        // In-memory working copies (will be loaded from storage on init)
+        let forumsData = [];
+        let commentsData = {};
+
+        // ==========================================
+        // UTILITY FUNCTIONS
+        // ==========================================
+
+        function showError(message) {
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        function showLoading(show = true) {
+            document.getElementById('loading').style.display = show ? 'block' : 'none';
+        }
+
+        function generateId() {
+            return Date.now().toString() + Math.random().toString(36).substr(2, 9);
+        }
+
+        function formatTimeAgo(dateString) {
+            const now = new Date();
+            const date = new Date(dateString);
+            const diffMs = now - date;
+            const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+            const diffDays = Math.floor(diffHours / 24);
+            
+            if (diffHours < 1) return 'just now';
+            if (diffHours === 1) return '1 hour ago';
+            if (diffHours < 24) return `${diffHours} hours ago`;
+            if (diffDays === 1) return '1 day ago';
+            return `${diffDays} days ago`;
+        }
+
+        function extractDomain(url) {
+            try {
+                return new URL(url).hostname;
+            } catch (e) {
+                return 'mynexus.xyz';
+            }
+        }
+
+        // ==========================================
+        // STORAGE HELPERS (localStorage with auto-refresh)
+        // ==========================================
+        function saveToStorage() {
+            try {
+                localStorage.setItem(STORAGE_FORUMS_KEY, JSON.stringify(forumsData));
+                localStorage.setItem(STORAGE_COMMENTS_KEY, JSON.stringify(commentsData));
+                localStorage.setItem(STORAGE_VERSION_KEY, DATA_VERSION);
+            } catch (e) {
+                console.warn('Failed to save to localStorage', e);
+            }
+        }
+
+        function loadFromStorage() {
+            try {
+                const savedVersion = localStorage.getItem(STORAGE_VERSION_KEY);
+                const f = localStorage.getItem(STORAGE_FORUMS_KEY);
+                const c = localStorage.getItem(STORAGE_COMMENTS_KEY);
+
+                if (savedVersion !== DATA_VERSION) {
+                    // Version changed → reset to defaults
+                    console.log(`Data version changed from ${savedVersion} to ${DATA_VERSION}. Resetting to defaults.`);
+                    forumsData = JSON.parse(JSON.stringify(defaultForums));
+                    commentsData = JSON.parse(JSON.stringify(defaultComments));
+                    saveToStorage();
+                } else if (f && c) {
+                    // Load from storage
+                    forumsData = JSON.parse(f);
+                    commentsData = JSON.parse(c);
+                } else {
+                    // First-time setup
+                    forumsData = JSON.parse(JSON.stringify(defaultForums));
+                    commentsData = JSON.parse(JSON.stringify(defaultComments));
+                    saveToStorage();
+                }
+            } catch (e) {
+                console.warn('Failed to load from localStorage, using defaults', e);
+                forumsData = JSON.parse(JSON.stringify(defaultForums));
+                commentsData = JSON.parse(JSON.stringify(defaultComments));
+            }
+        }
+
+        // ==========================================
+        // DATA FUNCTIONS
+        // ==========================================
+
+        async function fetchForums() {
+            // Return a sorted copy by upvotes (descending) so UI is stable
+            return forumsData.slice().sort((a, b) => (b.upvotes || 0) - (a.upvotes || 0));
+        }
+
+        async function fetchComments(forumId) {
+            return commentsData[forumId] || [];
+        }
+
+        async function addForum(forumData) {
+            const newForum = {
+                id: generateId(),
+                ...forumData,
+                created_at: new Date().toISOString(),
+                upvotes: 1
+            };
+            forumsData.push(newForum);
+            commentsData[newForum.id] = [];
+            saveToStorage(); // persist
+            return newForum;
+        }
+
+        async function addComment(forumId, commentData) {
+            const newComment = {
+                id: generateId(),
+                ...commentData,
+                created_at: new Date().toISOString()
+            };
+            if (!commentsData[forumId]) {
+                commentsData[forumId] = [];
+            }
+            commentsData[forumId].push(newComment);
+            saveToStorage(); // persist
+            return newComment;
+        }
+
+        async function upvoteForum(forumId) {
+            const forum = forumsData.find(f => f.id === forumId);
+            if (forum) {
+                forum.upvotes = (forum.upvotes || 0) + 1;
+                saveToStorage(); // persist
+            }
+            return forum;
+        }
+
+        // ==========================================
+        // UI RENDERING FUNCTIONS
+        // ==========================================
+
+        async function renderForums() {
+            const forumsList = document.getElementById('forums-list');
+            const forums = await fetchForums();
+            
+            if (forums.length === 0) {
+                forumsList.innerHTML = `
+                    <tr>
+                        <td colspan="3" style="text-align: center; padding: 40px; color: #888;">
+                            No forums yet. <a href="#" onclick="showCreateModal()" style="color: #58a6ff;">Submit the first one!</a>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            let html = '';
+            forums.forEach((forum, index) => {
+                const rank = index + 1;
+                const domain = forum.url ? extractDomain(forum.url) : 'mynexus.xyz';
+                
+                html += `
+                    <tr class="athing" id="forum-${forum.id}">
+                        <td class="rank">${rank}.</td>
+                        <td class="votelinks">
+                            <span class="votearrow" onclick="handleUpvote('${forum.id}')">▲</span>
+                        </td>
+                        <td class="title-cell">
+                            <a href="#" class="storylink" onclick="showForum('${forum.id}')">${forum.title}</a>
+                            <span class="sitebit">
+                                <span class="sitestr"> (<a href="#" class="sitebit">${domain}</a>)</span>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"></td>
+                        <td class="subtext">
+                            <span class="score">${forum.upvotes || 1} points</span> by 
+                            <a href="#" class="hnuser">${forum.author || 'user'}</a>
+                            <span class="age" title="${new Date(forum.created_at).toLocaleString()}">
+                                <a href="#">${formatTimeAgo(forum.created_at)}</a>
+                            </span> | <a href="#">hide</a> | 
+                            <a href="#" onclick="showForum('${forum.id}')">comments</a>
+                        </td>
+                    </tr>
+                    <tr class="spacer"><td colspan="3" class="spacer"></td></tr>
+                `;
+            });
+            
+            forumsList.innerHTML = html;
+        }
+
+        async function showForum(forumId) {
+            const forums = await fetchForums();
+            const forum = forums.find(f => f.id.toString() === forumId.toString());
+            if (!forum) return;
+
+            const comments = await fetchComments(forumId);
+            const forumPage = document.getElementById('forum-page');
+            const domain = forum.url ? extractDomain(forum.url) : 'mynexus.xyz';
+            
+            forumPage.innerHTML = `
+                <a href="#" onclick="showHomepage()" class="back-link">← Back to Forums</a>
+                
+                <div class="forum-header">
+                    <div class="forum-title">${forum.title}</div>
+                    <div class="forum-description">${forum.content}</div>
+                    <div style="font-size: 8pt; color: #888;">
+                        ${forum.upvotes || 1} points by ${forum.author || 'user'} ${formatTimeAgo(forum.created_at)} | ${domain}
+                    </div>
+                </div>
+
+                ${forum.url ? `
+                    <div class="drive-link-section">
+                        <strong>📚 Course Materials:</strong><br>
+                        <a href="${forum.url}" target="_blank" class="drive-link">${forum.url}</a>
+                    </div>
+                ` : ''}
+
+                <div class="comments-section">
+                    <h3 id="comment-count">${comments.length} comment${comments.length === 1 ? '' : 's'}</h3>
+                    
+                    <div class="comment-form">
+                        <form id="comment-form" onsubmit="handleAddComment(event, '${forumId}')">
+                            <div class="form-group">
+                                <label for="comment-author">Your Name:</label>
+                                <input type="text" id="comment-author" name="author" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="comment-content">Comment:</label>
+                                <textarea id="comment-content" name="content" required placeholder="Share your thoughts..."></textarea>
+                            </div>
+                            <button type="submit" class="btn">Add Comment</button>
+                        </form>
+                    </div>
+
+                    <div id="comments-list">
+                        ${comments.length === 0 ? 
+                            '<p style="color: #888;">No comments yet. Be the first to share your thoughts!</p>' :
+                            comments.map(comment => `
+                                <div class="comment">
+                                    <div class="comment-meta">
+                                        <strong>${comment.author}</strong> • ${formatTimeAgo(comment.created_at)}
+                                    </div>
+                                    <div class="comment-content">${comment.content}</div>
+                                </div>
+                            `).join('')
+                        }
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('homepage').style.display = 'none';
+            document.getElementById('forum-page').style.display = 'block';
+        }
+
+        function showHomepage() {
+            document.getElementById('homepage').style.display = 'block';
+            document.getElementById('forum-page').style.display = 'none';
+            renderForums();
+        }
+
+        // ==========================================
+        // EVENT HANDLERS
+        // ==========================================
+
+        async function handleUpvote(forumId) {
+            try {
+                await upvoteForum(forumId);
+                renderForums();
+            } catch (error) {
+                showError('Failed to upvote forum');
+            }
+        }
+
+        async function handleCreateForum(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const forumData = {
+                title: formData.get('title'),
+                content: formData.get('content'),
+                url: formData.get('url'),
+                author: formData.get('author')
+            };
+
+            if (!forumData.title || !forumData.content || !forumData.author) {
+                showError('Please fill in all required fields');
+                return;
+            }
+
+            try {
+                showLoading(true);
+                const newForum = await addForum(forumData);
+                hideCreateModal();
+                event.target.reset();
+                renderForums();
+                // automatically open the newly created forum so user sees it immediately
+                setTimeout(() => showForum(newForum.id), 150);
+            } catch (error) {
+                showError('Failed to create forum');
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        async function handleAddComment(event, forumId) {
+            event.preventDefault();
+            const formEl = event.target;
+            const author = formEl.querySelector('[name="author"]').value;
+            const content = formEl.querySelector('[name="content"]').value;
+
+            if (!author || !content) {
+                showError('Please enter your name and a comment');
+                return;
+            }
+
+            const commentData = { author, content };
+
+            try {
+                showLoading(true);
+                await addComment(forumId, commentData);
+                formEl.reset();
+                showForum(forumId); // Refresh the forum page to show new comment
+            } catch (error) {
+                showError('Failed to add comment');
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        // ==========================================
+        // MODAL FUNCTIONS
+        // ==========================================
+
+        function showCreateModal() {
+            document.getElementById('create-modal').style.display = 'block';
+        }
+
+        function hideCreateModal() {
+            document.getElementById('create-modal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('create-modal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        };
+
+        // ==========================================
+        // INITIALIZATION
+        // ==========================================
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set up form handler
+            document.getElementById('create-form').addEventListener('submit', handleCreateForum);
+            // Load from storage (or defaults if version changed)
+            loadFromStorage();
+            // Render
+            renderForums();
+        });
+    </script>
+</body>
+</html>
